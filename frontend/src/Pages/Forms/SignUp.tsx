@@ -3,8 +3,8 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import User, { newUser } from '../../Models/User';
 
-const SignUp
-  = () => {
+const SignUp: React.FC<{ user: User | undefined }>
+  = ({ user }) => {
 
     const navigate = useNavigate()
 
@@ -13,11 +13,15 @@ const SignUp
     const [PW, setPW] = useState("");
     const [signUpError, setSignUpError] = useState("")
 
+    useEffect(() => {
+      if (user) navigate('/home')
+    }, [user, navigate])
+
     function clickSignUp(e: any) {
       e.preventDefault()
 
-      newUser({name: name, email: email, password: PW})
-        .then((u : User) => {console.log(u); navigate('/home')})
+      newUser({ name: name, email: email, password: PW })
+        .then((u: User) => { console.log(u); navigate('/home') })
         .catch((e) => setSignUpError(e.message))
     }
 

@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import User, { login } from '../../Models/User';
 
 
-const Login
-  = () => {
+const Login: React.FC<{ user: User | undefined, setUser: Function }>
+  = ({ user, setUser }) => {
 
     const navigate = useNavigate()
 
@@ -13,15 +13,21 @@ const Login
     const [PW, setPW] = useState("");
     const [loginError, setLoginError] = useState("")
 
+    useEffect(() => {
+      if (user) navigate('/home')
+    }, [user, navigate])
+
     function clickLogIn(e: any) {
       e.preventDefault()
 
       login(email, PW)
-        .then((u : User) => {console.log(u); navigate('/home')})
+        .then((u: User) => {
+          localStorage.setItem('user', JSON.stringify(u))
+          setUser(u)
+        })
         .catch((e) => setLoginError(e.message))
-
     }
-    
+
     return (
       <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
         <Row>
@@ -31,12 +37,12 @@ const Login
 
               <Form.Group controlId="formEmail" className='py-2' >
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" onChange={e=>setEmail(e.target.value)} placeholder="Enter email" />
+                <Form.Control type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter email" />
               </Form.Group>
 
               <Form.Group controlId="formPassword" className='py-2'>
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" onChange={e=>setPW(e.target.value)} placeholder="Password" />
+                <Form.Control type="password" onChange={e => setPW(e.target.value)} placeholder="Password" />
               </Form.Group>
 
               <Button variant="primary" type="submit" className="w-100 mt-3" onClick={clickLogIn}>
