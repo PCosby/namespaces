@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import User from '../../Models/User';
 
 
-
 const HomePage: React.FC<{ user: User | undefined }>
   = ({ user }) => {
 

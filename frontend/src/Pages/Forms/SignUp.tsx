@@ -3,8 +3,8 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import User, { newUser } from '../../Models/User';
 
-const SignUp: React.FC<{ user: User | undefined }>
-  = ({ user }) => {
+const SignUp: React.FC<{ user: User | undefined, setUser : Function}>
+  = ({ user, setUser}) => {
 
     const navigate = useNavigate()
 
@@ -21,7 +21,9 @@ const SignUp: React.FC<{ user: User | undefined }>
       e.preventDefault()
 
       newUser({ name: name, email: email, password: PW })
-        .then((u: User) => { console.log(u); navigate('/home') })
+        .then((u: User) => { 
+          localStorage.setItem('user', JSON.stringify(u))
+          setUser(u) })
         .catch((e) => setSignUpError(e.message))
     }
 

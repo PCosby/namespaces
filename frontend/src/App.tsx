@@ -17,10 +17,9 @@ function App() {
 
   return (
     <Router>
-      {/* <Header user={user} setUser={setUser}/> */}
-      <TopBar/>
+      {user && <TopBar setUser={setUser}/>}
       <Routes>
-        <Route path='/signup' element={<SignUp user={user} />} />
+        <Route path='/signup' element={<SignUp user={user} setUser={setUser} />} />
         <Route path='/login' element={<Login user={user} setUser={setUser} />} />
         <Route path='/' element={<HomePage user={user} />} />
         <Route path='/home' element={<HomePage user={user} />} />
