@@ -5,6 +5,7 @@ import Login from './Pages/Forms/Login';
 import HomePage from './Pages/Home/HomePage';
 import TopBar from './Layout/TopBar';
 import './App.css'
+import Footer from './Layout/Footer';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/' element={<HomePage user={user} />} />
         <Route path='/home' element={<HomePage user={user} />} />
       </Routes>
+      {user && <Footer/>}
     </Router>
   );
 }

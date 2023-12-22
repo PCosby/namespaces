@@ -29,7 +29,7 @@ const TopBar: React.FC<{ setUser : Function}>
               <Link to="/requests" className="nav-link px-5 d-flex align-items-center"><IoIosPaper className='mx-2' /> Requests</Link>
             </Nav>
             <Nav>
-              <Button variant="outline-none" className="nav-link px-5 d-flex align-items-center" onClick = {logout}>
+              <Button variant="outline-none" className="nav-link d-flex align-items-center" onClick = {logout}>
                 <FaSignOutAlt className='mx-1' /> Logout
               </Button>
             </Nav>
