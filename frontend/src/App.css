@@ -1,3 +1,18 @@
 .nav-link-text {
   font-size: 1.1em;
+  z-index : 1;
+}
+
+.sidebar {
+  width: 0vw;
+  height: 100%;
+  position: fixed;
+  transition: width 0.3s;
+  overflow-x: hidden;
+  font-size: 1.1em;
+  z-index: 0;
+}
+
+.sidebar.open {
+  width: 18vw;
 }
