@@ -5,10 +5,11 @@ import { IoIosPaper } from 'react-icons/io';
 import { BsBoxes } from "react-icons/bs";
 import { Link, useNavigate } from 'react-router-dom';
 import SideBar from './SideBar';
+import User from '../Models/User';
 
 
-const TopBar: React.FC<{ setUser: Function }>
-  = ({ setUser }) => {
+const TopBar: React.FC<{ setUser: Function, user : User }>
+  = ({ setUser, user }) => {
 
     const [toggled, setToggled] = useState(false);
 
@@ -21,18 +22,18 @@ const TopBar: React.FC<{ setUser: Function }>
 
     return (
       <>
-        <SideBar toggled={toggled} />
+        <SideBar toggled={toggled} user={user} />
         <Navbar bg="dark" variant="dark" expand="lg" className='nav-link-text'>
           <Container fluid >
-            <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center' onClick={() => setToggled(!toggled)}><FaBars /></Navbar.Brand>
+            <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center text-light' onClick={() => setToggled(!toggled)}><FaBars /></Navbar.Brand>
             <Nav className="justify-content-center flex-grow-1">
-              <Link to="/home" className="nav-link px-5 d-flex align-items-center"><FaHome className='mx-2' /> Home</Link>
-              <Link to="/namespaces" className="nav-link px-5 d-flex align-items-center"><BsBoxes className='mx-2' /> NameSpaces</Link>
-              <Link to="/servers" className="nav-link px-5 d-flex align-items-center"><FaServer className='mx-2' /> Servers</Link>
-              <Link to="/requests" className="nav-link px-5 d-flex align-items-center"><IoIosPaper className='mx-2' /> Requests</Link>
+              <Link to="/home" className="nav-link px-5 d-flex align-items-center text-light"><FaHome className='mx-2' /> Home</Link>
+              <Link to="/namespaces" className="nav-link px-5 d-flex align-items-center text-light"><BsBoxes className='mx-2' /> NameSpaces</Link>
+              <Link to="/servers" className="nav-link px-5 d-flex align-items-center text-light"><FaServer className='mx-2' /> Servers</Link>
+              <Link to="/requests" className="nav-link px-5 d-flex align-items-center text-light"><IoIosPaper className='mx-2' /> Requests</Link>
             </Nav>
             <Nav>
-              <Button variant="outline-none" className="nav-link d-flex align-items-center" onClick={logout}>
+              <Button variant="outline-none" className="nav-link d-flex align-items-center text-light" onClick={logout}>
                 <FaSignOutAlt className='mx-1' /> Logout
               </Button>
             </Nav>

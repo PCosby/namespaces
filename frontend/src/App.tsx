@@ -18,7 +18,7 @@ function App() {
 
   return (
     <Router>
-      {user && <TopBar setUser={setUser}/>}
+      {user && <TopBar setUser={setUser} user={user}/>}
       <Routes>
         <Route path='/signup' element={<SignUp user={user} setUser={setUser} />} />
         <Route path='/login' element={<Login user={user} setUser={setUser} />} />
