@@ -22,7 +22,7 @@ const TopBar: React.FC<{ setUser: Function, user : User }>
 
     return (
       <>
-        <SideBar toggled={toggled} user={user} />
+        <SideBar toggled={toggled} user={user} logout={logout}/>
         <Navbar bg="dark" variant="dark" expand="lg" className='nav-link-text'>
           <Container fluid >
             <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center text-light' onClick={() => setToggled(!toggled)}><FaBars /></Navbar.Brand>

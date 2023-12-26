@@ -7,7 +7,7 @@
   width: 0vw;
   height: 100%;
   position: fixed;
-  transition: width 0.3s;
+  transition: width 0.3s ease;
   overflow-x: hidden;
   font-size: 1.1em;
   z-index: 0;
