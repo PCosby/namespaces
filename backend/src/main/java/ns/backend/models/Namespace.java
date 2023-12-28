@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "servers")
+@Table(name = "namespaces")
 @Data
-public class Server {
+public class Namespace {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,16 @@ public class Server {
   @Column(name = "description")
   private String desc;
 
+  @ManyToOne
+  @JoinColumn(name = "server_id", insertable = false, updatable = false)
+  private Server server;
+
+  @Column(name = "server_id")
+  private Long serverId;
+
   @UpdateTimestamp
   @Column(name = "update_dttm")
   private LocalDateTime updateDttm;
-
 
   @ManyToOne
   @JoinColumn(name = "update_user_id", insertable = false, updatable = false)
@@ -31,4 +37,5 @@ public class Server {
   
   @Column(name = "update_user_id")
   private Long updateUserId;
+
 }
