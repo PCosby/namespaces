@@ -13,19 +13,21 @@ function App() {
   const [userProfile, setUserProfile] = useState<UserProfile | undefined>(undefined)
 
   useEffect(() => {
-    getUserProfile().then(setUserProfile)
+    getUserProfile()
+      .then(setUserProfile)
+      .catch((e: any) => {setUserProfile(undefined) })
   }, [])
 
   return (
     <Router>
-      {userProfile && <TopBar setUserProfile={setUserProfile} userProfile={userProfile}/>}
+      {userProfile && <TopBar setUserProfile={setUserProfile} userProfile={userProfile} />}
       <Routes>
         <Route path='/signup' element={<SignUp userProfile={userProfile} setUserProfile={setUserProfile} />} />
         <Route path='/login' element={<Login userProfile={userProfile} setUserProfile={setUserProfile} />} />
         <Route path='/' element={<HomePage userProfile={userProfile} />} />
         <Route path='/home' element={<HomePage userProfile={userProfile} />} />
       </Routes>
-      {userProfile && <Footer/>}
+      {userProfile && <Footer />}
     </Router>
   );
 }
@@ -34,6 +36,5 @@ export default App;
 
 /* 
 TODO:
-user profile data type: user, user roles, all namespaces, all servers
 fix UI for homepage
 */

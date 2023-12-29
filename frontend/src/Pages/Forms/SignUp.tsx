@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import User, { newUser } from '../../Models/User';
 import UserProfile, { getUserProfile, storeUser } from '../../Models/Helpers/UserProfile';
 
-const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile : Function}>
-  = ({ userProfile, setUserProfile}) => {
+const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: Function }>
+  = ({ userProfile, setUserProfile }) => {
 
     const navigate = useNavigate()
 
@@ -22,9 +22,12 @@ const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile : 
       e.preventDefault()
 
       newUser({ name: name, email: email, password: PW })
-        .then((u: User) => { 
+        .then((u: User) => {
           storeUser(u)
-          getUserProfile().then((prof : UserProfile | undefined) => setUserProfile(prof)) })
+          getUserProfile()
+            .then((prof: UserProfile | undefined) => setUserProfile(prof))
+            .catch(() => setUserProfile(undefined))
+        })
         .catch((e) => setSignUpError(e.message))
     }
 

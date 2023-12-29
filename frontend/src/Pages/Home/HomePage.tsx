@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import CarouselTemplate from '../../UITemplates/CarouselTemplate';
-import Role, { allRolesForUser } from '../../Models/Role';
 import UserProfile from '../../Models/Helpers/UserProfile';
 
 

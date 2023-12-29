@@ -41,16 +41,3 @@
   width: 200px; /* Example width */
   
 }
-.card-content {
-  /* Style for the content inside each card */
-  background-color: #f0f0f0; /* Example background color */
-  color: #333; /* Example text color */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
