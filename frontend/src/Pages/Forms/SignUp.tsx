@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import User, { newUser } from '../../Models/User';
+import UserProfile, { getUserProfile, storeUser } from '../../Models/Helpers/UserProfile';
 
-const SignUp: React.FC<{ user: User | undefined, setUser : Function}>
-  = ({ user, setUser}) => {
+const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile : Function}>
+  = ({ userProfile, setUserProfile}) => {
 
     const navigate = useNavigate()
 
@@ -14,16 +15,16 @@ const SignUp: React.FC<{ user: User | undefined, setUser : Function}>
     const [signUpError, setSignUpError] = useState("")
 
     useEffect(() => {
-      if (user) navigate('/home')
-    }, [user, navigate])
+      if (userProfile) navigate('/home')
+    }, [userProfile, navigate])
 
     function clickSignUp(e: any) {
       e.preventDefault()
 
       newUser({ name: name, email: email, password: PW })
         .then((u: User) => { 
-          localStorage.setItem('user', JSON.stringify(u))
-          setUser(u) })
+          storeUser(u)
+          getUserProfile().then((prof : UserProfile | undefined) => setUserProfile(prof)) })
         .catch((e) => setSignUpError(e.message))
     }
 

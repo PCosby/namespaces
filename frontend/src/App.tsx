@@ -6,29 +6,34 @@ import HomePage from './Pages/Home/HomePage';
 import TopBar from './Layout/TopBar';
 import './App.css'
 import Footer from './Layout/Footer';
-import User from './Models/User';
+import UserProfile, { getUserProfile } from './Models/Helpers/UserProfile';
 
 function App() {
 
-  const [user, setUser] = useState<User | undefined>(undefined)
+  const [userProfile, setUserProfile] = useState<UserProfile | undefined>(undefined)
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user')
-    if (savedUser) setUser(JSON.parse(savedUser))
+    getUserProfile().then(setUserProfile)
   }, [])
 
   return (
     <Router>
-      {user && <TopBar setUser={setUser} user={user}/>}
+      {userProfile && <TopBar setUserProfile={setUserProfile} userProfile={userProfile}/>}
       <Routes>
-        <Route path='/signup' element={<SignUp user={user} setUser={setUser} />} />
-        <Route path='/login' element={<Login user={user} setUser={setUser} />} />
-        <Route path='/' element={<HomePage user={user} />} />
-        <Route path='/home' element={<HomePage user={user} />} />
+        <Route path='/signup' element={<SignUp userProfile={userProfile} setUserProfile={setUserProfile} />} />
+        <Route path='/login' element={<Login userProfile={userProfile} setUserProfile={setUserProfile} />} />
+        <Route path='/' element={<HomePage userProfile={userProfile} />} />
+        <Route path='/home' element={<HomePage userProfile={userProfile} />} />
       </Routes>
-      {user && <Footer/>}
+      {userProfile && <Footer/>}
     </Router>
   );
 }
 
 export default App;
+
+/* 
+TODO:
+user profile data type: user, user roles, all namespaces, all servers
+fix UI for homepage
+*/

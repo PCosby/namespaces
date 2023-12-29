@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import User, { login } from '../../Models/User';
+import UserProfile, { getUserProfile, storeUser } from '../../Models/Helpers/UserProfile';
 
 
-const Login: React.FC<{ user: User | undefined, setUser: Function }>
-  = ({ user, setUser }) => {
+const Login: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: Function }>
+  = ({ userProfile, setUserProfile }) => {
 
     const navigate = useNavigate()
 
@@ -14,16 +15,16 @@ const Login: React.FC<{ user: User | undefined, setUser: Function }>
     const [loginError, setLoginError] = useState("")
 
     useEffect(() => {
-      if (user) navigate('/home')
-    }, [user, navigate])
+      if (userProfile) navigate('/home')
+    }, [userProfile, navigate])
 
     function clickLogIn(e: any) {
       e.preventDefault()
 
       login(email, PW)
         .then((u: User) => {
-          localStorage.setItem('user', JSON.stringify(u))
-          setUser(u)
+          storeUser(u)
+          getUserProfile().then((prof : UserProfile | undefined) => setUserProfile(prof))
         })
         .catch((e) => setLoginError(e.message))
     }

@@ -20,7 +20,9 @@ const CarouselTemplate: React.FC<{roles : Role[]}> = ({ roles }) => {
             {roles.map((role, index) => (
                 <SwiperSlide key={index}>
                     <div className="card-content">
-                        {role?.user.name}
+                        <h4>{role?.ns.name}</h4> <br/>
+                        <h4>Server: {role.ns.server.name}</h4>
+                        <h4>{role.value}</h4>
                     </div>
                 </SwiperSlide>
             ))}

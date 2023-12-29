@@ -5,24 +5,24 @@ import { IoIosPaper } from 'react-icons/io';
 import { BsBoxes } from "react-icons/bs";
 import { Link, useNavigate } from 'react-router-dom';
 import SideBar from './SideBar';
-import User from '../Models/User';
+import UserProfile, { resetUser } from '../Models/Helpers/UserProfile';
 
 
-const TopBar: React.FC<{ setUser: Function, user : User }>
-  = ({ setUser, user }) => {
+const TopBar: React.FC<{ setUserProfile: Function, userProfile : UserProfile }>
+  = ({ setUserProfile, userProfile }) => {
 
     const [toggled, setToggled] = useState(false);
 
     const navigate = useNavigate()
     const logout = () => {
-      localStorage.setItem('user', '')
-      setUser(undefined)
+      resetUser()
+      setUserProfile(undefined)
       navigate('/login')
     }
 
     return (
       <>
-        <SideBar toggled={toggled} user={user} logout={logout}/>
+        <SideBar toggled={toggled} userProfile={userProfile} logout={logout}/>
         <Navbar bg="dark" variant="dark" expand="lg" className='nav-link-text'>
           <Container fluid >
             <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center text-light' onClick={() => setToggled(!toggled)}><FaBars /></Navbar.Brand>
