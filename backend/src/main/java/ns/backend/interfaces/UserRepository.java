@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-  Page<User> findByEmail(@RequestParam("email") String email, Pageable pageable);
+  User findByEmail(@RequestParam("email") String email);
   
 }

@@ -12,11 +12,10 @@ export async function getUserFromEmail(email: string) : Promise<User> {
 
   const url: string = `http://localhost:8080/api/users/search/findByEmail?email=${email}`
   const response = await fetch(url);
-  if (!response.ok) throw Error("Bad connection")
-  let response_json = await response.json()
-  if (response_json.page.totalElements === 0) throw Error("Invalid email")
+  
+  if (!response.ok) throw Error("Invalid email")
+  let user_json = await response.json()
 
-  let user_json = response_json._embedded.users[0]
   let user : User = {
     id : parseInt(user_json.id),
     name : user_json.name,
