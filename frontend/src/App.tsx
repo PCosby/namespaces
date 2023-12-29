@@ -31,3 +31,10 @@ function App() {
 }
 
 export default App;
+
+/*
+TODO:
+fix request table
+- add constraint for user, namespace, and status = pending
+
+*/
