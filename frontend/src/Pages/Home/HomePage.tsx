@@ -17,8 +17,8 @@ const HomePage: React.FC<{ userProfile: UserProfile | undefined }>
 
     return (
       <Container>
-        <div className='display-2 py-3'>Welcome, <b>{userProfile?.user?.name}</b></div>
-        <h2 className='d-flex justify-content-center py-5'>Your namespaces</h2>
+        <div className='display-2 py-3 mb-5'>Welcome, <b>{userProfile?.user?.name}</b></div>
+        <h2 className='d-flex justify-content-center mb-3 py-4 border-bottom'>Your namespaces</h2>
         <CarouselTemplate roles={userProfile?.userRoles || []} />
       </Container>
     );

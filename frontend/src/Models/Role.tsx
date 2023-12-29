@@ -29,6 +29,13 @@ export const parseRole = (roleJSON : any): Role => {return {
   updateDttm : new Date(roleJSON.updateDttm)
 }}
 
+export const roleToColor = (value : RoleValue): string => {
+  return { DEVELOPER : "text-danger",
+  ADMIN : "text-success",
+  AUDITOR : "text-primary",
+  NOACCESS : "text-secondary"}[value]
+}
+
 export async function allRolesForUser(user: User) : Promise<Role[]> {
 
   const url: string = `http://localhost:8080/api/roles/search

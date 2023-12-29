@@ -35,9 +35,7 @@
   color: black; /* Replace with your desired color */
 }
 
-.mySwiper .swiper-slide {
-  /* Adjust the size of the cards */
-  height: 300px; /* Example height */
-  width: 200px; /* Example width */
-  
+.card-content {
+  padding-left: 50px;
+  padding-right: 50px;
 }
