@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    Page<Role> findByUserIdAndValueNot(@RequestParam("userId") Long userId, @RequestParam("value") RoleValue value, Pageable pageable);
+    Role[] findByUserIdAndValueNot(@RequestParam("userId") Long userId, @RequestParam("value") RoleValue value);
   
 }

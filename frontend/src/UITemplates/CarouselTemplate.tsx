@@ -5,9 +5,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
 
 import 'swiper/css/bundle';
+import Role from '../Models/Role';
 
 
-const CarouselTemplate: React.FC<{users : (User | undefined)[]}> = ({ users }) => {
+const CarouselTemplate: React.FC<{roles : Role[]}> = ({ roles }) => {
     return (
         <Swiper
             modules={[Navigation]}
@@ -16,10 +17,10 @@ const CarouselTemplate: React.FC<{users : (User | undefined)[]}> = ({ users }) =
             className="mySwiper"
             navigation 
         >
-            {users.map((user, index) => (
+            {roles.map((role, index) => (
                 <SwiperSlide key={index}>
                     <div className="card-content">
-                        {user?.name}
+                        {role?.user.name}
                     </div>
                 </SwiperSlide>
             ))}

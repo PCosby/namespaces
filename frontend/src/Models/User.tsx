@@ -8,6 +8,13 @@ export default class User {
     ) { }
 }
 
+export const parseUser = (userJSON : any): User => {return {
+  name : userJSON?.name,
+  email : userJSON?.email,
+  password : userJSON?.password,
+  id : userJSON?.id
+}}
+
 export async function getUserFromEmail(email: string) : Promise<User> {
 
   const url: string = `http://localhost:8080/api/users/search/findByEmail?email=${email}`

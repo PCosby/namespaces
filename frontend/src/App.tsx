@@ -6,10 +6,11 @@ import HomePage from './Pages/Home/HomePage';
 import TopBar from './Layout/TopBar';
 import './App.css'
 import Footer from './Layout/Footer';
+import User from './Models/User';
 
 function App() {
 
-  const [user, setUser] = useState(undefined)
+  const [user, setUser] = useState<User | undefined>(undefined)
 
   useEffect(() => {
     const savedUser = localStorage.getItem('user')
