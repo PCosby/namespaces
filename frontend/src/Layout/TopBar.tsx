@@ -21,7 +21,7 @@ const TopBar: React.FC<{ profile: UserProfile }>
       profile.resetProfile()
       navigate('/login')
     }
-    const search = (e : any) => {
+    const search = (e: any) => {
       profile.setSearch(searchText)
     }
 
@@ -48,11 +48,9 @@ const TopBar: React.FC<{ profile: UserProfile }>
           <InputGroup style={{ width: '25%' }} className='bg-dark px-2 py-2 rounded-bottom '>
             <FormControl placeholder="Search" aria-label="Search"
               value={searchText} onChange={e => setSearchText(e.target.value)} />
-            <InputGroup.Text>
-              <Button variant="outline-secondary" className="p-0" onClick={search}
-                style={{ border: 'none', background: 'transparent' }} >
-                <FaSearch />
-              </Button>
+
+            <InputGroup.Text style={{ cursor: 'pointer' }} onClick={search}>
+              <FaSearch />
             </InputGroup.Text>
           </InputGroup>
         </div>
