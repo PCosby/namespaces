@@ -8,21 +8,21 @@ import SideBar from './SideBar';
 import UserProfile, { resetUser } from '../Models/Helpers/UserProfile';
 
 
-const TopBar: React.FC<{ setUserProfile: Function, userProfile : UserProfile }>
-  = ({ setUserProfile, userProfile }) => {
+const TopBar: React.FC<{profile : UserProfile }>
+  = ({ profile }) => {
 
     const [toggled, setToggled] = useState(false);
 
     const navigate = useNavigate()
     const logout = () => {
       resetUser()
-      setUserProfile(undefined)
+      profile.resetProfile()
       navigate('/login')
     }
 
     return (
       <>
-        <SideBar toggled={toggled} userProfile={userProfile} logout={logout}/>
+        <SideBar toggled={toggled} profile={profile} logout={logout}/>
         <Navbar bg="dark" variant="dark" expand="lg" className='nav-link-text'>
           <Container fluid >
             <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center text-light' onClick={() => setToggled(!toggled)}><FaBars /></Navbar.Brand>

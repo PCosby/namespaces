@@ -5,21 +5,21 @@ import CarouselTemplate from '../../UITemplates/CarouselTemplate';
 import UserProfile from '../../Models/Helpers/UserProfile';
 
 
-const HomePage: React.FC<{ userProfile: UserProfile | undefined }>
-  = ({ userProfile }) => {
+const HomePage: React.FC<{ profile: UserProfile | undefined }>
+  = ({ profile }) => {
 
     const navigate = useNavigate()
 
     useEffect(() => {
-      if (!userProfile) return navigate('/login')
+      if (!profile) return navigate('/login')
 
-    }, [userProfile, navigate])
+    }, [profile, navigate])
 
     return (
       <Container>
-        <div className='display-2 py-3 mb-5'>Welcome, <b>{userProfile?.user?.name}</b></div>
+        <div className='display-2 py-3 mb-5'>Welcome, <b>{profile?.user?.name}</b></div>
         <h2 className='d-flex justify-content-center mb-3 py-4 border-bottom'>Your namespaces</h2>
-        <CarouselTemplate roles={userProfile?.userRoles || []} />
+        <CarouselTemplate roles={profile?.userRoles || []} />
       </Container>
     );
   };

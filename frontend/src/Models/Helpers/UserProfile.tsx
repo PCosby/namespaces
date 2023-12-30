@@ -6,25 +6,38 @@ import User, { parseUser } from "../User";
 export default class UserProfile {
   constructor(
     public user: User,
+    public setProfile : Function,
     public userRoles : Role[],
     public namespaces: Namespace[],
     public servers: Server[],
+    public searchText : String
     ) { }
+
+    setSearch(search : String){
+      this.searchText = search;
+      this.setProfile(this);
+    }
+
+    resetSearch() {this.setSearch('')}
+
+    resetProfile() {this.setProfile(undefined)}
 }
 
-export async function getUserProfile() : Promise<UserProfile | undefined> {
+export async function getUserProfile(setProfile : Function) {
   const savedUser = localStorage.getItem('user')
   if (!savedUser) return undefined;
 
   const user : User = parseUser(JSON.parse(savedUser));
   const userRoles : Role[] = await allRolesForUser(user)
   
-  return {
-    user : user,
-    userRoles : userRoles,
-    namespaces : [],
-    servers : []
-  }
+  setProfile(new UserProfile(
+    user,
+    setProfile,
+    userRoles,
+    [],
+    [],
+    ""
+  ))
 }
 
 export function storeUser(user : User){

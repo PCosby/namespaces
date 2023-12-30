@@ -5,8 +5,8 @@ import User, { login } from '../../Models/User';
 import UserProfile, { getUserProfile, storeUser } from '../../Models/Helpers/UserProfile';
 
 
-const Login: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: Function }>
-  = ({ userProfile, setUserProfile }) => {
+const Login: React.FC<{ profile: UserProfile | undefined, setProfile: Function }>
+  = ({ profile, setProfile }) => {
 
     const navigate = useNavigate()
 
@@ -15,8 +15,8 @@ const Login: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: Fu
     const [loginError, setLoginError] = useState("")
 
     useEffect(() => {
-      if (userProfile) navigate('/home')
-    }, [userProfile, navigate])
+      if (profile) navigate('/home')
+    }, [profile, navigate])
 
     function clickLogIn(e: any) {
       e.preventDefault()
@@ -24,7 +24,7 @@ const Login: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: Fu
       login(email, PW)
         .then((u: User) => {
           storeUser(u)
-          getUserProfile().then((prof : UserProfile | undefined) => setUserProfile(prof))
+          getUserProfile(setProfile).catch(() => setProfile(undefined))
         })
         .catch((e) => setLoginError(e.message))
     }

@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import User, { newUser } from '../../Models/User';
 import UserProfile, { getUserProfile, storeUser } from '../../Models/Helpers/UserProfile';
 
-const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: Function }>
-  = ({ userProfile, setUserProfile }) => {
+const SignUp: React.FC<{ profile: UserProfile | undefined, setProfile: Function }>
+  = ({ profile, setProfile }) => {
 
     const navigate = useNavigate()
 
@@ -15,8 +15,8 @@ const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: F
     const [signUpError, setSignUpError] = useState("")
 
     useEffect(() => {
-      if (userProfile) navigate('/home')
-    }, [userProfile, navigate])
+      if (profile) navigate('/home')
+    }, [profile, navigate])
 
     function clickSignUp(e: any) {
       e.preventDefault()
@@ -24,9 +24,7 @@ const SignUp: React.FC<{ userProfile: UserProfile | undefined, setUserProfile: F
       newUser({ name: name, email: email, password: PW })
         .then((u: User) => {
           storeUser(u)
-          getUserProfile()
-            .then((prof: UserProfile | undefined) => setUserProfile(prof))
-            .catch(() => setUserProfile(undefined))
+          getUserProfile(setProfile).catch(() => setProfile(undefined))
         })
         .catch((e) => setSignUpError(e.message))
     }

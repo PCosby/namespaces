@@ -10,24 +10,23 @@ import UserProfile, { getUserProfile } from './Models/Helpers/UserProfile';
 
 function App() {
 
-  const [userProfile, setUserProfile] = useState<UserProfile | undefined>(undefined)
+  const [profile, setProfile] = useState<UserProfile | undefined>(undefined)
 
   useEffect(() => {
-    getUserProfile()
-      .then(setUserProfile)
-      .catch((e: any) => {setUserProfile(undefined) })
+    getUserProfile(setProfile)
+      .catch(() => {setProfile(undefined)})
   }, [])
 
   return (
     <Router>
-      {userProfile && <TopBar setUserProfile={setUserProfile} userProfile={userProfile} />}
+      {profile && <TopBar profile={profile} />}
       <Routes>
-        <Route path='/signup' element={<SignUp userProfile={userProfile} setUserProfile={setUserProfile} />} />
-        <Route path='/login' element={<Login userProfile={userProfile} setUserProfile={setUserProfile} />} />
-        <Route path='/' element={<HomePage userProfile={userProfile} />} />
-        <Route path='/home' element={<HomePage userProfile={userProfile} />} />
+        <Route path='/signup' element={<SignUp profile={profile} setProfile={setProfile} />} />
+        <Route path='/login' element={<Login profile={profile} setProfile={setProfile} />} />
+        <Route path='/' element={<HomePage profile={profile} />} />
+        <Route path='/home' element={<HomePage profile={profile} />} />
       </Routes>
-      {userProfile && <Footer />}
+      {profile && <Footer />}
     </Router>
   );
 }

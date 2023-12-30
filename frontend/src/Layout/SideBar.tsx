@@ -9,16 +9,16 @@ import UserProfile from '../Models/Helpers/UserProfile';
 
 
 
-const SideBar: React.FC<{ toggled: boolean, userProfile: UserProfile, logout: MouseEventHandler }>
-  = ({ toggled, userProfile, logout }) => {
+const SideBar: React.FC<{ toggled: boolean, profile: UserProfile, logout: MouseEventHandler }>
+  = ({ toggled, profile, logout }) => {
     return (
       <Nav className={`align-items-center d-flex bg-dark sidebar ${toggled && 'open'}`} variant='dark'>
 
         <Col>
 
           <Row className='py-5'>
-            <h1 className='text-light d-flex justify-content-center align-items-center'> {userProfile.user.name} </h1>
-            <h5 className='text-secondary d-flex justify-content-center align-items-center'> {userProfile.user.email} </h5>
+            <h1 className='text-light d-flex justify-content-center align-items-center'> {profile.user.name} </h1>
+            <h5 className='text-secondary d-flex justify-content-center align-items-center'> {profile.user.email} </h5>
           </Row>
 
           <Row className='py-3 separator-with-text text-success'> Namespaces </Row>
