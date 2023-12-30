@@ -10,17 +10,28 @@ export default class UserProfile {
     public userRoles : Role[],
     public namespaces: Namespace[],
     public servers: Server[],
-    public searchText : String
+    public searchText : string
     ) { }
 
-    setSearch(search : String){
-      this.searchText = search;
-      this.setProfile(this);
+    setSearch(search : string){
+      const newProfile : UserProfile = this.copy()
+      newProfile.searchText = search;
+      this.setProfile(newProfile);
     }
 
     resetSearch() {this.setSearch('')}
 
     resetProfile() {this.setProfile(undefined)}
+
+    copy() {
+      return new UserProfile(
+        this.user, 
+        this.setProfile, 
+        this.userRoles, 
+        this.namespaces, 
+        this.servers, 
+        this.searchText)
+    }
 }
 
 export async function getUserProfile(setProfile : Function) {

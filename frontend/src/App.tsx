@@ -13,7 +13,7 @@ function App() {
   const [profile, setProfile] = useState<UserProfile | undefined>(undefined)
 
   useEffect(() => {
-    getUserProfile(setProfile)
+     getUserProfile(setProfile)
       .catch(() => {setProfile(undefined)})
   }, [])
 

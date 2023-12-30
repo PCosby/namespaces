@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Navbar, Nav, FormControl, Button, InputGroup } from 'react-bootstrap';
 import { FaBars, FaHome, FaSearch, FaServer, FaSignOutAlt } from 'react-icons/fa';
 import { IoIosPaper } from 'react-icons/io';
@@ -8,10 +8,12 @@ import SideBar from './SideBar';
 import UserProfile, { resetUser } from '../Models/Helpers/UserProfile';
 
 
-const TopBar: React.FC<{profile : UserProfile }>
+const TopBar: React.FC<{ profile: UserProfile }>
   = ({ profile }) => {
 
     const [toggled, setToggled] = useState(false);
+    const [searchText, setSearchText] = useState('');
+
 
     const navigate = useNavigate()
     const logout = () => {
@@ -19,10 +21,13 @@ const TopBar: React.FC<{profile : UserProfile }>
       profile.resetProfile()
       navigate('/login')
     }
+    const search = (e : any) => {
+      profile.setSearch(searchText)
+    }
 
     return (
       <>
-        <SideBar toggled={toggled} profile={profile} logout={logout}/>
+        <SideBar toggled={toggled} profile={profile} logout={logout} />
         <Navbar bg="dark" variant="dark" expand="lg" className='nav-link-text'>
           <Container fluid >
             <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center text-light' onClick={() => setToggled(!toggled)}><FaBars /></Navbar.Brand>
@@ -41,9 +46,10 @@ const TopBar: React.FC<{profile : UserProfile }>
         </Navbar>
         <div className='d-flex justify-content-center'>
           <InputGroup style={{ width: '25%' }} className='bg-dark px-2 py-2 rounded-bottom '>
-            <FormControl placeholder="Search" aria-label="Search" />
+            <FormControl placeholder="Search" aria-label="Search"
+              value={searchText} onChange={e => setSearchText(e.target.value)} />
             <InputGroup.Text>
-              <Button variant="outline-secondary" className="p-0"
+              <Button variant="outline-secondary" className="p-0" onClick={search}
                 style={{ border: 'none', background: 'transparent' }} >
                 <FaSearch />
               </Button>
