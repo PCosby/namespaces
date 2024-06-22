@@ -26,7 +26,6 @@ public class Server {
   @Column(name = "update_dttm")
   private LocalDateTime updateDttm;
 
-
   @ManyToOne
   @JoinColumn(name = "update_user_id", insertable = false, updatable = false)
   private User updateUser;
